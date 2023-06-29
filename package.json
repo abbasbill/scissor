@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "devstart": "nodemon server.js",
+		"test": "jest"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -30,7 +32,9 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
+  "author": "Billiamin Abbas",
   "engines": {
 		"node": "18.16.0"
 	}
+  
 }
