@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./bin/www",
-    "devstart": "nodemon ./bin/www",
+    "start": "node ./bin/www.js",
+    "devstart": "nodemon ./bin/www.js",
 		"test": "jest"
   },
   "dependencies": {
