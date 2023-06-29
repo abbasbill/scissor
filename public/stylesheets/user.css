@@ -92,11 +92,11 @@
 			overflow: hidden; /* Hide overflowing content */
 			white-space: nowrap; /* Force content to stay on one line */ 
 			text-overflow: ellipsis;
-  			max-width: 60%;
+  			max-width: 50%;
 		}
 
 		.date{
-			font-size: 15px;
-			max-width: 60%;
+			font-size: 12px;
+			max-width: 50%;
 			margin: 0;
 		}

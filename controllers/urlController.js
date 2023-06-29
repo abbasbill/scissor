@@ -30,7 +30,7 @@ exports.urlController = {
                 user: req.user._id
             });
 
-            res.redirect(303, "/shorten");
+            res.redirect(303, "/api/shorten");
 
         } catch (error) {
             // Handle any errors that occurred during the database operation
@@ -69,7 +69,7 @@ exports.urlController = {
 
             // If short URL doesn't exist, return 404 error
             if(!url) {
-                return res.status(404).send("Url not found");
+                return res.status(404).send("Not found");
             }
             if (url) {
                 const results = req.params.id

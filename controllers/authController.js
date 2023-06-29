@@ -15,7 +15,7 @@ exports.authController = {
 					res.status(400).send(err);
 				} else {
 					passport.authenticate('local')(req, res, () => {
-					res.redirect(303, "/shorten");
+					res.redirect(303, "/api/shorten");
 					})
 				}
 			})
@@ -30,7 +30,7 @@ exports.authController = {
 	login: async (req, res) => {
 		// handles the login request for existing users
 		passport.authenticate('local')(req, res, () => {
-			res.redirect(303, '/shorten');
+			res.redirect(303, '/api/shorten');
 		});
 	},
 
