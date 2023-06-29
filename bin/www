@@ -6,6 +6,7 @@ const dbConnection = require('../database/index')
 var app = require('../app');
 var debug = require('debug')('scissor:server');
 var http = require('http');
+const redisConnection = require('../config/redis');
 require("dotenv").config
 /**
  * Get port from environment and store in Express.
@@ -24,6 +25,18 @@ var server = http.createServer(app);
 // connect to the database
 
 dbConnection.connect(),
+
+// connect to redis
+// redisConnection.connect()
+
+redisConnection.on('connect', () => {
+    console.log('Redis connected')
+})
+
+// redisConnection.on('error', () => {
+//     console.log('Redis connection error')
+// })
+
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -11,14 +11,13 @@ const {userModel} = require('./models');
 
 const session = require('express-session');  //session middleware
 
-// const LocalStrategy = require('passport-local').Strategy;
-
 var app = express();
 
 var indexRouter = require('./routes/index.js');
 var authRouter = require('./routes/auth.js');
 var urlRouter = require('./routes/url.js');
 var titlyRouter = require('./routes/titly.js');
+const {titlyController} = require('./controllers/titlyController');
 
 
 app.use(express.urlencoded({ extended: false }));
@@ -53,8 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/shorten', urlRouter)     
-app.use('/:id?', titlyRouter)      
-
+app.use('/:id', titlyController.getOriginalUrl)      
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -73,8 +71,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-
-
-

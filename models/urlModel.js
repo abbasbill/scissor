@@ -22,22 +22,19 @@ const urlSchema = new Schema({
       clicks: [
         {
           timestamp: {
-            type: Date,
-            default: Date.now,
-          },
-          referrer: {
-            type: String,
+            type: Number,
           },
         },
       ],
-      createdAt: {
-        type: Date,
-        default: Date.now,
-      },
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      }
-});
-module.exports  = mongoose.model('Urls', urlSchema);
+      // createdAt: {
+      //   type: Date,
+      //   default: Date.now,
+      // },
 
+      user: 
+      { type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'}
+      },
+      { timestamps: true }
+      );
+module.exports  = mongoose.model('Urls', urlSchema);
