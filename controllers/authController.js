@@ -15,7 +15,7 @@ exports.authController = {
 					res.status(400).send(err);
 				} else {
 					passport.authenticate('local')(req, res, () => {
-					res.redirect(303, "https://titly.onrender.com/shorten");
+					res.redirect(303, "/shorten");
 					})
 				}
 			})
