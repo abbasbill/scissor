@@ -40,7 +40,7 @@ exports.urlController = {
                 return res.status(201).send("Url already exist. view your url history")
             }
 
-            const shortenedUrl = `http://localhost:4000/${shortid.generate()}`;
+            const shortenedUrl = `https://titly.onrender.com/${shortid.generate()}`;
 
             const url = await urlModel.create({
                 originalUrl: originalUrl,

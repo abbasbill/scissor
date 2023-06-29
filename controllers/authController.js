@@ -12,11 +12,10 @@ exports.authController = {
 			}
 			userModel.register(new userModel({ username: user.username }), user.password, (err, user) => {
 				if (err) {
-					console.log(err.message);
 					res.status(400).send(err);
 				} else {
 					passport.authenticate('local')(req, res, () => {
-					res.redirect(303, "/shorten");
+					res.redirect(303, "https://titly.onrender.com/shorten");
 					})
 				}
 			})

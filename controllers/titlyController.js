@@ -6,7 +6,7 @@ const cache = require("../config/redis")
 exports.titlyController = {
     // Route for redirecting short URLs
     getOriginalUrl: async (req, res) => {
-        const short = `http://localhost:4000/${req.params.id}`;
+        const short = `https://titly.onrender.com/${req.params.id}`;
         console.log(req.params.id)
         try {
             // Find the corresponding URL document in the database
