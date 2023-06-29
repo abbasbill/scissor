@@ -1,5 +1,5 @@
 		.container {
-			max-width: 50%;
+			max-width: 60%;
 			margin: 50px auto;
 			padding: 20px;
 			background-color: #fff;
@@ -61,7 +61,7 @@
 		}
 
 		.url-list{
-			max-width: 50%;
+			max-width: 60%;
 			margin: 50px auto;
 			padding: 20px;
 			background-color: #fff;
@@ -91,5 +91,5 @@
 			overflow: hidden; /* Hide overflowing content */
 			white-space: nowrap; /* Force content to stay on one line */ 
 			text-overflow: ellipsis;
-  			max-width: 100%;
+  			max-width: 60%;
 		}
