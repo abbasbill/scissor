@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "yarn run ./bin/www",
+    "start": "./bin/www",
     "devstart": "nodemon ./bin/www",
 		"test": "jest"
   },
