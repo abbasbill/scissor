@@ -1,5 +1,5 @@
 		.container {
-			max-width: 600px;
+			max-width: 80%;
 			margin: 50px auto;
 			padding: 20px;
 			background-color: #fff;
@@ -61,7 +61,7 @@
 		}
 
 		.url-list{
-			max-width: 600px;
+			max-width: 80%;
 			margin: 50px auto;
 			padding: 20px;
 			background-color: #fff;
@@ -83,7 +83,10 @@
 			color: rgb(34, 34, 243);
 		}
 		
-		a{
+		 a{
 			text-decoration: none;
-			color: rgb(34, 34, 243);
+		}
+
+		.original-url {
+			overflow: hidden; /* Hide overflowing content */
 		}
