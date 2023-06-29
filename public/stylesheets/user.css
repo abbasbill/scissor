@@ -24,7 +24,7 @@
 		}
 
 		.form-group input[type="text"] {
-			width: 80%;
+			width: 95%;
 			padding: 8px;
 			font-size: 16px;
 			border: 1px solid #ddd;
@@ -64,6 +64,7 @@
 			max-width: 60%;
 			margin: 50px auto;
 			padding: 20px;
+			padding-bottom: 10px;
 			background-color: #fff;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		}
@@ -92,4 +93,10 @@
 			white-space: nowrap; /* Force content to stay on one line */ 
 			text-overflow: ellipsis;
   			max-width: 60%;
+		}
+
+		.date{
+			font-size: 12px;
+			max-width: 60%;
+			padding-top: 12px;
 		}

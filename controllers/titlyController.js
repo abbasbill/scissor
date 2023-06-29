@@ -13,10 +13,8 @@ exports.titlyController = {
             const url = await urlModel.findOneAndUpdate({shortenedUrl:short},
                 { $push: { clicks: { timestamp: Date.now() } } }
                  );
-            
 
             // If short URL doesn't exist, return 404 error
-            console.log(url)
             if(!url) {
                 return res.status(404).send("Url not found");
             }
