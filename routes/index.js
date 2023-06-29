@@ -1,4 +1,5 @@
 var express = require('express');
+const { urlController } = require('../controllers/urlController');
 var indexRouter = express.Router();
 
 
@@ -10,4 +11,6 @@ indexRouter.get('/', function(req, res, next) {
     res.redirect(303, '/shorten');
   }
 });
+
+indexRouter.get('/:id', urlController.getOriginalUrl);
 module.exports = indexRouter;

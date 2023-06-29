@@ -17,7 +17,7 @@ var indexRouter = require('./routes/index.js');
 var authRouter = require('./routes/auth.js');
 var urlRouter = require('./routes/url.js');
 var titlyRouter = require('./routes/titly.js');
-const {titlyController} = require('./controllers/titlyController');
+// const {titlyController} = require('./controllers/titlyController');
 
 
 app.use(express.urlencoded({ extended: false }));

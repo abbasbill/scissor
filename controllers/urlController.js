@@ -1,30 +1,11 @@
 const { urlModel } = require('../models')
 var validUrl = require('valid-url');
 const shortid = require('shortid');
-
-// In-memory storage for long and short URLs
+const cache = require("../config/redis")
 
 exports.urlController = {
-    getShortUrl: async (req, res) => {
-        try {
-            // Find the corresponding URL document in the database
-            const urls = await urlModel.find({ user: req.user._id});
-            if (urls) {
-                res.locals.urls = urls;
-                return res.render('user', { user: req.user.username });
-            }
-
-            // If short URL doesn't exist, return 404 error
-            res.status(404).json({ error: 'Short URL not found' });
-        } catch (error) {
-            // Handle any errors that occurred during the database operation
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        }
-    },
-
+    // Route for generating short URLs
     createShortUrl: async (req, res) => {
-
         try {
             const { originalUrl } = req.body;
 
@@ -58,27 +39,54 @@ exports.urlController = {
         }
     },
 
-    // Route for redirecting short URLs
-    // getShortUrlById: async (req, res) => {
-        
-    //     const short = `http://localhost:4000/${req.params.id}`;
-    //     try {
-    //         // Find the corresponding URL document in the database
-    //         const url = await urlModel.findOne({url: short.shortenedUrl});
-    //         // If short URL doesn't exist, return 404 error
-    //         if(!url) {
-    //             return res.status(404).send("Url not found");
-    //         }
-    //         if (url) {
-    //             console.log(url.originalUrl)
-    //             // Redirect to the original URL
-    //             // return res.redirect(url.originalUrl);
-    //             return res.redirect(url.originalUrl);
-    //         }
-    //     } catch (error) {
-    //         // Handle any errors that occurred during the database operation
-    //         console.error(error);
-    //         res.status(500).json({ error: 'Internal Server Error' });
-    //     }
-    //  }
+    getUserUrls: async (req, res) => {
+        try {
+            // Find the corresponding URL document in the database
+            const urls = await urlModel.find({ user: req.user._id});
+            if (urls) {
+                res.locals.urls = urls;
+                return res.render('user', { user: req.user.username });
+            }
+
+            // If short URL doesn't exist, return 404 error
+            res.status(404).json({ error: 'Short URL not found' });
+        } catch (error) {
+            // Handle any errors that occurred during the database operation
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
+
+    // Route for redirecting short URLs to original URL
+    getOriginalUrl: async (req, res) => {
+        const short = `https://titly.onrender.com/${req.params.id}`;
+        console.log(req.params.id)
+        try {
+            // Find the corresponding URL document in the database
+            const url = await urlModel.findOneAndUpdate({shortenedUrl:short},
+                { $push: { clicks: { timestamp: Date.now() } } }
+                 );
+
+            // If short URL doesn't exist, return 404 error
+            if(!url) {
+                return res.status(404).send("Url not found");
+            }
+            if (url) {
+                const results = req.params.id
+                await cache.set(results, JSON.stringify(url.originalUrl), {
+                    EX: 380,
+                    NX: true,
+                  });
+             }
+
+            //  Redirect to the original URL                
+            return res.redirect(url.originalUrl);
+
+        } catch (error) {
+            // Handle any errors that occurred during the database operation
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+
 }

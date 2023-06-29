@@ -5,7 +5,7 @@ const connectEnsureLogin = require('connect-ensure-login'); //authorization midd
 
 var urlRouter = express.Router();
 // Route for generating short URLs
-  urlRouter.get('/', connectEnsureLogin.ensureLoggedIn(), urlController.getShortUrl);
+  urlRouter.get('/', connectEnsureLogin.ensureLoggedIn(), urlController.getUserUrls);
   urlRouter.post('/',  connectEnsureLogin.ensureLoggedIn(), urlController.createShortUrl);
   // urlRouter.get('/:id', urlController.getShortUrlById)
 
