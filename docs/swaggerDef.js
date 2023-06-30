@@ -12,8 +12,13 @@ const swaggerDef = {
   },
   servers: [
     {
-      url: `http://localhost:${process.env.PORT}`,
-      description: 'Development server',
+      url: `https://titly.onrender.com`,
+      description: 'production server',
+
+    },
+    {
+      url: `https://localhost:${process.env.PORT}`,
+      description: 'developmentserver server',
 
     },
   ],
