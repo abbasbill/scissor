@@ -1,0 +1,84 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+      example:
+        id: 5ebac534954b54139806c112
+        username: johnDoe
+
+    Url:
+      type: object
+      properties:
+        id:
+          type: string
+        originalUrl:
+          type: string
+        shortenedUrl:
+          type: string
+        customUrl:
+          type: string
+        qrCodeUrl:
+          type: string
+        clicks:
+          type: array
+          properties:
+            timestamps:
+               type: number           
+      example:
+        id: WfB7yC2FTMnCziif9X8yzwDEfJXAg
+        originalUrl: http://www.longurlexample.com
+        shortenedUrl: http://www.shorturlexample.com
+        customUrl: http:/www.customurlexample.com
+        qrCode: ""
+        clicks: [0]
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+
+  responses:
+    DuplicateUsername:
+      description: Username already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Username already taken
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Please authenticate
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 403
+            message: Forbidden
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 404
+            message: Not found

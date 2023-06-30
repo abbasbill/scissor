@@ -16,9 +16,7 @@ var app = express();
 var indexRouter = require('./routes/index.js');
 var authRouter = require('./routes/auth.js');
 var urlRouter = require('./routes/url.js');
-var titlyRouter = require('./routes/titly.js');
-// const {titlyController} = require('./controllers/titlyController');
-
+var docsRouter = require('./routes/docs.js');
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -51,8 +49,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/api/shorten', urlRouter)     
-// app.use('/:id', titlyController.getOriginalUrl)      
+app.use('/api/shorten', urlRouter) 
+app.use('/api/docs', docsRouter)        
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

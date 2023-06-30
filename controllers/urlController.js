@@ -15,7 +15,7 @@ exports.urlController = {
             }
 
             // Check if the long URL already exists in the database
-            const existingUrl = await urlModel.findOne({ originalUrl });
+            const existingUrl = await urlModel.findOne({ $and: [{user: req.user._id}, { originalUrl: originalUrl }]});
 
             if (existingUrl) {
                 return res.status(201).send("Url already exist. view your url history")
@@ -71,13 +71,13 @@ exports.urlController = {
             if(!url) {
                 return res.status(404).send("Not found");
             }
-            if (url) {
-                const results = req.params.id
-                await cache.set(results, JSON.stringify(url.originalUrl), {
-                    EX: 380,
-                    NX: true,
-                  });
-             }
+            // if (url) {
+            //     const results = req.params.id
+            //     await cache.set(results, JSON.stringify(url.originalUrl), {
+            //         EX: 380,
+            //         NX: true,
+            //       });
+            //  }
 
             //  Redirect to the original URL                
             return res.redirect(url.originalUrl);
