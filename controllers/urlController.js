@@ -2,7 +2,7 @@ const { urlModel } = require('../models')
 var validUrl = require('valid-url');
 const shortid = require('shortid');
 const cache = require("../config/redis")
-
+const httpStatus = require('http-status');
 exports.urlController = {
     // Route for generating short URLs
     createShortUrl: async (req, res) => {
@@ -18,7 +18,7 @@ exports.urlController = {
             const existingUrl = await urlModel.findOne({ $and: [{user: req.user._id}, { originalUrl: originalUrl }]});
 
             if (existingUrl) {
-                return res.status(201).send("Url already exist. view your url history")
+                return res.status(201).send("Url already exist")
             }
 
             const shortenedUrl = `https://titly.onrender.com/${shortid.generate()}`;
@@ -31,7 +31,7 @@ exports.urlController = {
             });
                 // returns user object if req.header("content-type") === 'application/json'
 						if (req.header("content-type") === 'application/json') {
-							return res.status(httpStatus.CREATED).send({ url: url });
+							return res.status(httpStatus.CREATED).send({url});
 						}
 				// redirects to the shorten page if req.header("content-type") !== 'application/json'
                             res.redirect(303, "/api/shorten");
