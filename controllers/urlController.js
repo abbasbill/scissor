@@ -29,8 +29,12 @@ exports.urlController = {
                 clicks:[],
                 user: req.user._id
             });
-
-            res.redirect(303, "/api/shorten");
+                // returns user object if req.header("content-type") === 'application/json'
+						if (req.header("content-type") === 'application/json') {
+							return res.status(httpStatus.CREATED).send({ url: url });
+						}
+				// redirects to the shorten page if req.header("content-type") !== 'application/json'
+                            res.redirect(303, "/api/shorten");
 
         } catch (error) {
             // Handle any errors that occurred during the database operation
