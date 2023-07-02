@@ -29,12 +29,14 @@ exports.urlController = {
                 clicks:[],
                 user: req.user._id
             });
-                // returns user object if req.header("content-type") === 'application/json'
-						if (req.header("content-type") === 'application/json') {
-							return res.status(httpStatus.CREATED).send({url});
-						}
-				// redirects to the shorten page if req.header("content-type") !== 'application/json'
-                            res.redirect(303, "/api/shorten");
+                // returns url object if req.header("content-type") === 'application/json'
+                console.log(req.header("content-type"))
+				if (req.header("content-type") === 'application/json') {
+					 res.status(httpStatus.CREATED).send({ url });
+				}else{
+				// else redirects to the shorten endpoint if req.header("content-type") !== 'application/json'
+                return res.redirect(303, "/api/shorten");
+                }
 
         } catch (error) {
             // Handle any errors that occurred during the database operation

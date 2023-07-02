@@ -8,7 +8,7 @@ components:
         username:
           type: string
       example:
-        id: 5ebac534954b54139806c112
+        id: sthrkicmg
         username: johnDoe
 
     Url:
