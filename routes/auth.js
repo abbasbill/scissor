@@ -1,6 +1,6 @@
 var express = require('express');
 var authRouter = express.Router();
-var {authController} = require('../controllers/authController');
+var { authController } = require('../controllers/authController');
 
 
 
@@ -41,20 +41,18 @@ module.exports = authRouter;
  *           schema:
  *             type: object
  *             required:
- *               - username
+ *               - name
  *               - password
  *             properties:
- *               username:
+ *               name:
  *                 type: string
  *                 description: must be unique
  *               password:
  *                 type: string
  *                 format: password
- *                 minLength: 8
- *                 description: At least one number and one letter
  *             example:
- *               username: username
- *               password: password1
+ *               username: <username>
+ *               password: <password>
  *     responses:
  *       "201":
  *         description: Created
@@ -65,6 +63,8 @@ module.exports = authRouter;
  *               properties:
  *                 user:
  *                   $ref: '#/components/schemas/User'
+ *       "400":
+ *         $ref: '#/components/responses/DuplicateUsername'
  */
 
 /**
