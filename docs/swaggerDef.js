@@ -11,14 +11,14 @@ const swaggerDef = {
     },
   },
   servers: [
-    // {
-    //   url: `https://titly.onrender.com`,
-    //   description: 'production server',
+    {
+      url: `https://titly.onrender.com`,
+      description: 'production server',
 
-    // },
+    },
     {
       url: `http://localhost:${process.env.PORT}`,
-      description: 'developmentserver server',
+      description: 'development server',
 
     },
   ],

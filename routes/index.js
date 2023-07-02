@@ -9,4 +9,5 @@ indexRouter.get('/', function(req, res, next) {
 });
 
 indexRouter.get('/:id', urlController.getOriginalUrl);
+
 module.exports = indexRouter;

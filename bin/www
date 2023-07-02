@@ -27,15 +27,15 @@ var server = http.createServer(app);
 dbConnection.connect(),
 
 // connect to redis
-// redisConnection.connect()
+redisConnection.connect()
 
-// redisConnection.on('connect', () => {
-//     console.log('Redis connected')
-// })
+redisConnection.on('connect', () => {
+    console.log('Redis connected')
+})
 
-// redisConnection.on('error', () => {
-//     console.log('Redis connection error')
-// })
+redisConnection.on('error', () => {
+    console.log('Redis connection error')
+})
 
 
 /**

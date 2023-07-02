@@ -47,9 +47,6 @@ exports.urlController = {
                 res.locals.urls = urls;
                 return res.render('user', { user: req.user.username });
             }
-
-            // If short URL doesn't exist, return 404 error
-            res.status(404).json({ error: 'Short URL not found' });
         } catch (error) {
             // Handle any errors that occurred during the database operation
             console.error(error);
@@ -69,15 +66,15 @@ exports.urlController = {
 
             // If short URL doesn't exist, return 404 error
             if(!url) {
-                return res.status(404).send("Not found");
+                return res.status(404).send("Resource Not found");
             }
-            // if (url) {
-            //     const results = req.params.id
-            //     await cache.set(results, JSON.stringify(url.originalUrl), {
-            //         EX: 380,
-            //         NX: true,
-            //       });
-            //  }
+            if (url) {
+                const results = req.params.id
+                await cache.set(results, JSON.stringify(url.originalUrl), {
+                    EX: 380,
+                    NX: true,
+                  });
+             }
 
             //  Redirect to the original URL                
             return res.redirect(url.originalUrl);
