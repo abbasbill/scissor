@@ -67,7 +67,7 @@ module.exports = urlRouter;
  *         userId: user_id
  *         schema:
  *           type: string
- *         description: Username
+ *         description: userId
  *     responses:
  *       "200":
  *         description: OK

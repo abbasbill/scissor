@@ -51,7 +51,13 @@ exports.urlController = {
             const urls = await urlModel.find({ user: req.user._id});
             if (urls) {
                 res.locals.urls = urls;
+                // return the url object if req.header("content-type") === 'application/json'
+			if (req.header("content-type") === 'application/json') {
+				return res.status(httpStatus.CREATED).send({ urls: urls });
+				}else{
+				// render to the user page if req.header("content-type") !== 'application/json'
                 return res.render('user', { user: req.user.username });
+                }
             }
         } catch (error) {
             // Handle any errors that occurred during the database operation
@@ -63,7 +69,6 @@ exports.urlController = {
     // Route for redirecting short URLs to original URL
     getOriginalUrl: async (req, res) => {
         const short = `https://titly.onrender.com/${req.params.id}`;
-        console.log(req.params.id)
         try {
             // Find the corresponding URL document in the database
             const url = await urlModel.findOneAndUpdate({shortenedUrl:short},
