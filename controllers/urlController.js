@@ -52,7 +52,9 @@ exports.urlController = {
             if (urls) {
                 res.locals.urls = urls; 
             }
-                // return the url object if req.header("content-type") === 'application/json'
+            console.log(req.get("host"))
+
+            // return the url object if req.header("content-type") === 'application/json'
 			if (req.header("content-type") === 'application/json') {
 				return res.status(httpStatus.CREATED).send({ urls: urls });
 				}else{
