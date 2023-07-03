@@ -50,7 +50,8 @@ exports.urlController = {
             // Find the corresponding URL document in the database
             const urls = await urlModel.find({ user: req.user._id});
             if (urls) {
-                res.locals.urls = urls;
+                res.locals.urls = urls; 
+            }
                 // return the url object if req.header("content-type") === 'application/json'
 			if (req.header("content-type") === 'application/json') {
 				return res.status(httpStatus.CREATED).send({ urls: urls });
@@ -58,7 +59,7 @@ exports.urlController = {
 				// render to the user page if req.header("content-type") !== 'application/json'
                 return res.render('user', { user: req.user.username });
                 }
-            }
+            
         } catch (error) {
             // Handle any errors that occurred during the database operation
             console.error(error);

@@ -89,8 +89,8 @@ module.exports = authRouter;
  *                 type: string
  *                 format: password
  *             example:
- *               username: username
- *               password: password
+ *               username: ande
+ *               password: ande
  *     responses:
  *       "200":
  *         description: OK
