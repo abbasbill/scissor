@@ -30,7 +30,7 @@ exports.urlController = {
                 user: req.user._id
             });
                 // returns url object if req.header("content-type") === 'application/json'
-                console.log(req.header("content-type"))
+            
 				if (req.header("content-type") === 'application/json') {
 					 res.status(httpStatus.CREATED).send({ url });
 				}else{
@@ -46,33 +46,71 @@ exports.urlController = {
     },
 
     getUserUrls: async (req, res) => {
+        if(req.headers.referer.includes('api/docs')){
+            try {
+                // Find the corresponding URL document in the database
+                const urls = await urlModel.find({ user: req.user._id });
+                if (urls) {
+                    return res.status(httpStatus.OK).send({ urls });
+                }
+
+            } catch (error) {
+                // Handle any errors that occurred during the database operation
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
+        }else {
+
         try {
             // Find the corresponding URL document in the database
             const urls = await urlModel.find({ user: req.user._id});
             if (urls) {
                 res.locals.urls = urls; 
             }
-            console.log(req.get("host"))
-
-            // return the url object if req.header("content-type") === 'application/json'
-			if (req.header("content-type") === 'application/json') {
-				return res.status(httpStatus.CREATED).send({ urls: urls });
-				}else{
-				// render to the user page if req.header("content-type") !== 'application/json'
                 return res.render('user', { user: req.user.username });
-                }
             
         } catch (error) {
             // Handle any errors that occurred during the database operation
             console.error(error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
+    }
     },
 
     // Route for redirecting short URLs to original URL
     getOriginalUrl: async (req, res) => {
-        const short = `https://titly.onrender.com/${req.params.id}`;
+        if(req.headers.referer.includes('api/docs')){
         try {
+            console.log(req.params.id)
+            const short = req.params.id
+            // Find the corresponding URL document in the database
+            const url = await urlModel.findOneAndUpdate({shortenedUrl:short},
+                { $push: { clicks: { timestamp: Date.now() } } }
+                 );
+
+            // If short URL doesn't exist, return 404 error
+            if(!url) {
+                return res.status(404).send("Resource Not found");
+            }
+            if (url) {
+                const results = req.params.id
+                await cache.set(results, JSON.stringify(url.originalUrl), {
+                    EX: 380,
+                    NX: true,
+                  });
+             }
+
+            //  Redirect to the original URL                
+            return res.send(url.originalUrl);
+
+        } catch (error) {
+            // Handle any errors that occurred during the database operation
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }else{
+        try {
+            const short = `https://titly.onrender.com/${req.params.id}`;
             // Find the corresponding URL document in the database
             const url = await urlModel.findOneAndUpdate({shortenedUrl:short},
                 { $push: { clicks: { timestamp: Date.now() } } }
@@ -98,6 +136,7 @@ exports.urlController = {
             console.error(error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
+    }
     }
 
 }

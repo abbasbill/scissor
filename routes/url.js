@@ -57,7 +57,7 @@ module.exports = urlRouter;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all user shortened urls
+ *     summary: Get all user shortened urls by their id
  *     description: Only authenticated users can access their urls.
  *     tags: [Url]
  *     security:
@@ -67,7 +67,7 @@ module.exports = urlRouter;
  *         userId: user_id
  *         schema:
  *           type: string
- *         description: userId
+ *         description: UserId
  *     responses:
  *       "200":
  *         description: OK
@@ -76,7 +76,7 @@ module.exports = urlRouter;
  *             schema:
  *               type: object
  *               properties:
- *                 results:
+ *                 urls:
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Url'
@@ -88,7 +88,7 @@ module.exports = urlRouter;
 
 /**
  * @swagger
- * /{id}:
+ * '/':
  *   get:
  *     summary: Get a url
  *     description: any user can fetch only the originalUrl associated with the provided shortened url.
