@@ -54,13 +54,25 @@
 				</span>
 
 				<div>
-					<form action="/api/shorten/" method="delete">
+					<form id="deleteForm">
 						<input type="hidden" name="id" value="<%= url._id %>">
-						<button class="delete" type="submit">Delete</button>
+						<button class="delete" type="submit" onclick="sendDeleteRequest()">Delete</button>
 					</form>
 				</div>
 			</div>
 			<% }); %>
 	</ul>
+
+	<script>
+		function sendDeleteRequest() {
+		  var form = document.getElementById("deleteForm");
+		  var id = form.elements["id"].value;
+	  
+		  // Perform the DELETE request using fetch API
+		  fetch("/api/shorten/" + id, {
+			method: "DELETE"
+		  })
+		}
+	  </script>
 </body>
 </html>
