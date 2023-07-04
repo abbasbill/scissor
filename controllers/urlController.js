@@ -148,20 +148,35 @@ exports.urlController = {
 
     // deleting users URL
      deleteUserUrl: async (req, res) => {
-        try {
-            const deleteUrlId = req.params.id;
-            console.log(deleteUrlId)
-            // Find the corresponding URL document in the database
-            const url = await urlModel.findOneAndDelete({ _id: deleteUrlId });
-            if (!url) {
-                return res.status(404).send("Url does not exist");
+        if(req.headers.referer && req.headers.referer.includes('api/docs')){
+            try {
+                const deleteUrlId = req.params.id;
+                console.log(deleteUrlId)
+                // Find the corresponding URL document in the database
+                const url = await urlModel.findOneAndDelete({ _id: deleteUrlId });
+                if (!url) {
+                    return res.status(404).send("Url does not exist");
+                }
+                    res.status(200).send("Url deleted successfully");
+            } catch (error) {
+                // Handle any errors that occurred during the database operation
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
             }
-                res.status(200).send("Url deleted successfully");
-        } catch (error) {
-            // Handle any errors that occurred during the database operation
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            try {
+                const deleteUrl = req.body.id;
+                // Find the corresponding URL document in the database
+                const url = await urlModel.findOneAndDelete({ _id: deleteUrl });
+                return res.redirect(303, "/api/shorten");
+
+            } catch (error) {
+                // Handle any errors that occurred during the database operation
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
         }
+       
      }
 
 }

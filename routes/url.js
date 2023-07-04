@@ -5,10 +5,10 @@ const connectEnsureLogin = require('connect-ensure-login'); //authorization midd
 
 var urlRouter = express.Router();
 // Route for generating short URLs
-urlRouter.post('/',  connectEnsureLogin.ensureLoggedIn(), urlController.createShortUrl);
+urlRouter.post('/',  connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.createShortUrl);
 
 // Route for fetching users URL
-urlRouter.get('/', connectEnsureLogin.ensureLoggedIn(), urlController.getUserUrls);
+urlRouter.get('/', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.getUserUrls);
 
 urlRouter.delete('/:id', urlController.deleteUserUrl);
 

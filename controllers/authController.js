@@ -57,7 +57,7 @@ exports.authController = {
 			if (req.header("content-type") === 'application/json') {
 				return res.send({ user: null });
 			}
-			res.redirect(303, '/');
+			res.redirect(303, '/auth/login');
 		});
 	}
 

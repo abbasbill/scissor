@@ -52,9 +52,15 @@
 					<p class="clicks">Clicks: <%= url.clicks.length %></p>
 					<p class="date"><%= url.createdAt %></p>
 				</span>
+
+				<div>
+					<form action="/api/shorten/" method="delete">
+						<input type="hidden" name="id" value="<%= url._id %>">
+						<button class="delete" type="submit">Delete</button>
+					</form>
+				</div>
 			</div>
 			<% }); %>
 	</ul>
 </body>
-
 </html>
