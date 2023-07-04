@@ -57,7 +57,7 @@ module.exports = urlRouter;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all user shortened urls by their id
+ *     summary: Get all user shortened urls by their userid
  *     description: Only authenticated users can access their urls.
  *     tags: [Url]
  *     security:
@@ -88,13 +88,11 @@ module.exports = urlRouter;
 
 /**
  * @swagger
- * '/':
+ * '/{id}':
  *   get:
  *     summary: Get a url
  *     description: any user can fetch only the originalUrl associated with the provided shortened url.
  *     tags: [Url]
- *     security:
- *       - passport-local: []
  *     parameters:
  *       - in: path
  *         name: id
