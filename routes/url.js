@@ -10,6 +10,8 @@ urlRouter.post('/',  connectEnsureLogin.ensureLoggedIn(), urlController.createSh
 // Route for fetching users URL
 urlRouter.get('/', connectEnsureLogin.ensureLoggedIn(), urlController.getUserUrls);
 
+urlRouter.delete('/:id', urlController.deleteUserUrl);
+
 
 module.exports = urlRouter;
 
@@ -88,18 +90,18 @@ module.exports = urlRouter;
 
 /**
  * @swagger
- * '/{id}':
+ * '/{shortenedUrl}':
  *   get:
- *     summary: Get a url
+ *     summary: Get the originalUrl associated with a provided shortenedUrl
  *     description: any user can fetch only the originalUrl associated with the provided shortened url.
  *     tags: [Url]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: shortenedUrl
  *         required: true
  *         schema:
  *           type: string
- *         description: Url id
+ *         description: shortenedUrl
  *     responses:
  *       "200":
  *         description: OK
@@ -113,7 +115,11 @@ module.exports = urlRouter;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *
+ */
+
+/**
+ * @swagger
+ * '/api/shorten/{id}':
  *   delete:
  *     summary: Delete a url
  *     description: only authenticated users can delete their urls.
@@ -121,7 +127,7 @@ module.exports = urlRouter;
  *     security:
  *       - passport-local: []
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: id
  *         required: true
  *         schema:

@@ -8,6 +8,6 @@ indexRouter.get('/', function(req, res, next) {
   res.render('index');
 });
 
-indexRouter.get('/:id', urlController.getOriginalUrl);
+indexRouter.get('/:shortenedUrl', urlController.getOriginalUrl);
 
 module.exports = indexRouter;

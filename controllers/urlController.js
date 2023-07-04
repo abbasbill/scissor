@@ -47,6 +47,7 @@ exports.urlController = {
         }
     },
 
+
     // fetching users URL
     getUserUrls: async (req, res) => {
         if (req.headers.referer.includes('api/docs')) {
@@ -82,11 +83,11 @@ exports.urlController = {
 
 
 
-    // Route for redirecting short URLs to original URL
+    // redirecting short URLs to original URL
     getOriginalUrl: async (req, res) => {
         if (req.headers.referer && req.headers.referer.includes('api/docs')) {
             try {
-                const shortUrl1 = req.params.id;
+                const shortUrl1 = req.params.shortenedUrl;
                 // Find the corresponding URL document in the database
                 const url = await urlModel.findOneAndUpdate({ shortenedUrl: shortUrl1 },
                     { $push: { clicks: { timestamp: Date.now() } } }
@@ -97,7 +98,7 @@ exports.urlController = {
                     return res.status(404).send("Url does not exist");
                 }
                 if (url) {
-                    const results = req.params.id
+                    const results = req.params.shortenedUrl
                     await cache.set(results, JSON.stringify(url.originalUrl), {
                         EX: 380,
                         NX: true,
@@ -142,6 +143,25 @@ exports.urlController = {
                 res.status(500).json({ error: 'Internal Server Error' });
             }
         }
-    }
+    },
+
+
+    // deleting users URL
+     deleteUserUrl: async (req, res) => {
+        try {
+            const deleteUrlId = req.params.id;
+            console.log(deleteUrlId)
+            // Find the corresponding URL document in the database
+            const url = await urlModel.findOneAndDelete({ _id: deleteUrlId });
+            if (!url) {
+                return res.status(404).send("Url does not exist");
+            }
+                res.status(200).send("Url deleted successfully");
+        } catch (error) {
+            // Handle any errors that occurred during the database operation
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+     }
 
 }
