@@ -39,7 +39,7 @@ exports.authController = {
 		passport.authenticate('local')(req, res, () => {
 				// returns user object if req.header("content-type") === 'application/json'
 				if (req.header("content-type") === 'application/json') {
-					return res.send({ user: req.user });
+					return res.status(200).json({ user: req.user });
 				}
 				// redirects to the shorten page if req.header("content-type") !== 'application/json'
 					res.redirect(303, '/api/shorten');

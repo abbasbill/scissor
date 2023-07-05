@@ -115,8 +115,8 @@ exports.urlController = {
             }
         } else {
             try {
-                const shortUrl2 = `https://titly.onrender.com/${req.params.id}`;
-
+                const shortUrl2 = `https://titly.onrender.com/${req.params.shortenedUrl}`;
+                    console.log(shortUrl2)
                 // Find the corresponding URL document in the database
                 const url = await urlModel.findOneAndUpdate({ shortenedUrl: shortUrl2 },
                     { $push: { clicks: { timestamp: Date.now() } } }
@@ -124,10 +124,10 @@ exports.urlController = {
 
                 // If short URL doesn't exist, return 404 error
                 if (!url) {
-                    return res.status(404).send("Resource Not found");
+                    return res.status(404).send("url Not found");
                 }
                 if (url) {
-                    const results = req.params.id
+                    const results = req.params.shortenedUrl
                     await cache.set(results, JSON.stringify(url.originalUrl), {
                         EX: 380,
                         NX: true,
@@ -178,5 +178,4 @@ exports.urlController = {
         }
        
      }
-
 }
