@@ -46,7 +46,6 @@ exports.authController = {
 		});
 	},
 
-
 	// handles the logout request
 	logout: async (req, res, next) => {
 		req.logout((err) => {

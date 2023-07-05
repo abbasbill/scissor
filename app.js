@@ -37,7 +37,6 @@ passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
 
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -51,7 +50,6 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/api/shorten', urlRouter) 
 app.use('/api/docs', docsRouter)        
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
