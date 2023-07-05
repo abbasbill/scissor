@@ -1,5 +1,5 @@
 		.container {
-			max-width: 60%;
+			max-width: 80%;
 			margin: 50px auto;
 			padding: 20px;
 			background-color: #fff;
@@ -69,7 +69,7 @@
 			cursor: pointer;
 		}
 		.url-list{
-			max-width: 60%;
+			max-width: 80%;
 			margin: 50px auto;
 			padding: 20px;
 			padding-bottom: 10px;
@@ -104,7 +104,10 @@
 		}
 
 		.date{
-			font-size: 12px;
-			max-width: 50%;
+			font-size: 14px;
+			max-width: 10%;
 			margin: 0;
+			overflow: hidden; /* Hide overflowing content */
+			white-space: nowrap; /* Force content to stay on one line */ 
+			text-overflow: clip;
 		}
