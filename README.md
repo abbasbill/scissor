@@ -1,5 +1,5 @@
 # Titly App
-This is an api for a titly app
+This is an api for titly app, a url shortening application
 
 ---
 
@@ -15,10 +15,10 @@ This is an api for a titly app
 
 ## Setup
 - Install NodeJS, mongodb, Redis
-
+- api documentation at https://titly.onrender.com/api/docs/
 ---
 ## Base URL
-- somehostsite.com
+- https://titly.onrender.com
 
 
 ## Models
@@ -27,7 +27,6 @@ This is an api for a titly app
 ### User
 | field  |  data_type | constraints  |
 |---|---|---|
-|  id |  string |  required |
 |  username |  string |  required |
 |  password |   string |  required  |
 
@@ -35,7 +34,6 @@ This is an api for a titly app
 ### Url
 | field  |  data_type | constraints  |
 |---|---|---|
-|  id |  string |  required |
 |  createdAt |  date |  required |
 |  originalUrl | string  |  required|
 |  shortened Url  |  string |  required  |
@@ -51,13 +49,14 @@ This is an api for a titly app
 
 ### Signup User
 
-- Route: /signup
+- Route: auth/signup
 - Method: POST
 - Body: 
 ```
 {
-  "password": "Password1",
+  
   "username": 'jon_doe",
+  "password": "Password",
 }
 ```
 
@@ -68,20 +67,21 @@ Success
 {
     message: 'Signup successful',
     user: {
-        "password": "Password1",
         "username": 'jon_doe",
+        "password": "Password",
+        
     }
 }
 ```
 ---
 ### Login User
 
-- Route: /login
+- Route: auth/login
 - Method: POST
 - Body: 
 ```
 {
-  "password": "Password1",
+  "password": "Password",
   "username": 'jon_doe",
 }
 ```
@@ -96,9 +96,9 @@ Success
 ```
 
 ---
-### Create Order
+### Create a  shortenedurl
 
-- Route: /order
+- Route: /api/shorten
 - Method: POST
 - Body: 
 ```
@@ -113,23 +113,22 @@ Success
 Success
 ```
 {
-    shortenedUrl: 'myDomainName.com/something',
+    shortenedUrl: 'https://titly.onrender.com/something',
     
 }
 ```
 ---
-### Get url
+### Get the originalUrl by providing the associated shortenedUrl
 
-- Route: /shorten/:id
+- Route: /:id
 - Method: GET
 - Responses
 
 Success
 ```
 {
-    shortenedUrl: 'myDomainName.com/something',
+    shortenedUrl: 'https://titly.onrender.com/something',
     OriginalUrl: 'somelongUrl.com',
-    createdAt: Mon Oct 31 2022 08:35:00 GMT+0100,
     clicks: integerNUmber
 }
 ```
@@ -137,7 +136,7 @@ Success
 
 ### Get urls
 
-- Route: /urls
+- Route: /api/shorten
 - Method: GET
 - Query params: 
     - usersId
@@ -146,9 +145,8 @@ Success
 Success
 ```
 {
-     shortenedUrl: 'myDomainName.com/something',
+    shortenedUrl: 'https://titly.onrender.com/something',
     OriginalUrl: 'somelongUrl.com',
-    createdAt: Mon Oct 31 2022 08:35:00 GMT+0100,
     clicks: integerNUmber
 }
 ```
