@@ -100,16 +100,16 @@
 			overflow: hidden; /* Hide overflowing content */
 			white-space: nowrap; /* Force content to stay on one line */ 
 			text-overflow: ellipsis;
-  			max-width: 50%;
+  			max-width: 80%;
 		}
 
 		.date{
 			font-size: 14px;
-			max-width: 50%;
 			margin: 0;
 			overflow: hidden; /* Hide overflowing content */
 			white-space: nowrap; /* Force content to stay on one line */ 
-			text-overflow: clip;
+			text-overflow: ellipsis;
+  			max-width: 80%;
 		}
 
 		@media only screen and (max-width: 767px) {
@@ -147,9 +147,6 @@
 
 		.date{
 			font-size: 15px;
-			overflow: hidden; /* Hide overflowing content */
-			white-space: nowrap; /* Force content to stay on one line */ 
-			text-overflow: clip;
 		}
 
 		.form-group input[type="submit"] {
