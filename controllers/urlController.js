@@ -50,7 +50,7 @@ exports.urlController = {
 
     // fetching users URL
     getUserUrls: async (req, res) => {
-        if (req.headers.referer.includes('api/docs')) {
+        if (req.headers.referer && req.headers.referer.includes('api/docs')) {
             try {
                 // Find the corresponding URL document in the database
                 const urls = await urlModel.find({ user: req.user._id });

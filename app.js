@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const helmet = require('helmet'); // security
+const rateLimit = require("express-rate-limit");
+
 const passport = require('passport');  // authentication
 
 require('dotenv').config();
@@ -13,12 +16,27 @@ const session = require('express-session');  //session middleware
 
 var app = express();
 
+const limiter = rateLimit({
+	windowMs: 0.5 * 60 * 1000, // 30 seconds
+	max: 50, // Limit each IP to 50 requests per `window` (here, per 30 seconds)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
 var indexRouter = require('./routes/index.js');
 var authRouter = require('./routes/auth.js');
 var urlRouter = require('./routes/url.js');
 var docsRouter = require('./routes/docs.js');
 
 app.use(express.urlencoded({ extended: false }));
+
+
+//add secuirty
+app.use(helmet())
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter)
+
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
