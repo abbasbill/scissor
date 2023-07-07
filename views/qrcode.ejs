@@ -70,6 +70,42 @@
             font-size: 15px;
           }
         </style>
+         <script>
+            const openModalBtn = document.getElementById("openModalBtn");
+            const modal = document.getElementById("modal");
+            const closeModal = document.getElementsByClassName("close")[0];
+        
+            openModalBtn.addEventListener("click", function() {
+              modal.style.display = "block";
+            });
+        
+            closeModal.addEventListener("click", function() {
+              modal.style.display = "none";
+            });
+        
+            window.addEventListener("click", function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            });
+  
+  
+  
+  
+            openModalBtn.addEventListener("press", function() {
+              modal.style.display = "block";
+            });
+        
+            closeModal.addEventListener("press", function() {
+              modal.style.display = "none";
+            });
+        
+            window.addEventListener("press", function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            });
+          </script>
       </head>
       <body>
         <div class="qrButton">
@@ -84,10 +120,10 @@
           </div>
         </div>
       
-        <script>
-          var openModalBtn = document.getElementById("openModalBtn");
-          var modal = document.getElementById("modal");
-          var closeModal = document.getElementsByClassName("close")[0];
+        <!-- <script>
+          const openModalBtn = document.getElementById("openModalBtn");
+          const modal = document.getElementById("modal");
+          const closeModal = document.getElementsByClassName("close")[0];
       
           openModalBtn.addEventListener("click", function() {
             modal.style.display = "block";
@@ -119,6 +155,6 @@
               modal.style.display = "none";
             }
           });
-        </script>
+        </script> -->
       </body>
 </html>
