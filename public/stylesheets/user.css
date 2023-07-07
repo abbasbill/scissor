@@ -112,6 +112,34 @@
   			max-width: 80%;
 		}
 
+		.qrcode-row{
+			margin: 10px 10px;
+			display: flex;
+			justify-content: space-between;
+			font-size: 15px;
+			font-weight: bolder;
+			cursor: pointer;
+		}
+
+		.delete{
+			background-color: red;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 4px;
+			cursor: pointer;
+			margin-left: 0;
+			color: white;
+		}
+		.qr-code{
+			background-color: green;
+			border: none;
+			padding: 10px;
+			border-radius: 4px;
+			cursor: pointer;
+			color: white;
+		}
+
+
 		@media only screen and (max-width: 767px) {
 			/* Styles for smartphones */
 			
@@ -153,4 +181,3 @@
 			width: 95%;
 		}
 		  }
-		  

@@ -53,7 +53,13 @@
 					<p class="date"><%= url.createdAt %></p>
 				</span>
 
-				<div>
+				<div class="qrcode-row">
+					
+					<form action="/api/shorten/qrcode" method="post">
+						<input type="hidden" name="shortenedUrl" value="<%= url.shortenedUrl %>">
+						<button class="qr-code" type="submit">Create a QR Code</button>
+					</form>
+
 					<form id="deleteForm">
 						<input type="hidden" name="id" value="<%= url._id %>">
 						<button class="delete" type="submit" onclick="sendDeleteRequest()">Delete</button>
@@ -73,6 +79,8 @@
 			method: "DELETE"
 		  })
 		}
-	  </script>
+
+	</script>
+
 </body>
 </html>

@@ -3,6 +3,7 @@ var validUrl = require('valid-url');
 const shortid = require('shortid');
 const cache = require("../config/redis")
 const httpStatus = require('http-status');
+const QRCode = require('qrcode');
 
 
 exports.urlController = {
@@ -24,7 +25,6 @@ exports.urlController = {
             }
 
             const shortenedUrl = `https://titly.onrender.com/${shortid.generate()}`;
-
             const url = await urlModel.create({
                 originalUrl: originalUrl,
                 shortenedUrl: shortenedUrl,
@@ -177,5 +177,24 @@ exports.urlController = {
             }
         }
        
-     }
+     },
+
+
+     getQrCode: async (req, res) => {
+        const data = req.body.shortenedUrl; // The data to be encoded in the QR code
+        // Generate the QR code as a data URL
+        QRCode.toDataURL(data, (err, url) => {
+          if (err) {
+            console.error(err);
+            res.status(500).send('Error generating QR code');
+          } else {
+            // // Send the QR code image as a response
+            // res.send(`<img src="${url}" alt="QR code" />`);
+            //  res.send(url);
+            res.locals.data = data
+            res.render('qrcode', { url: url });
+          }
+        });
+      }
+      
 }
