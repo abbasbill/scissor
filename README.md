@@ -5,21 +5,20 @@ This is an api for titly app, a url shortening application
 
 ## Specifications
 1. User can register and login with their username and password 
-2. User are authenticated with Passport using Local strategy
-3. Implement basic auth
+2. User authentication by Passport local strategy
+3. endpoints authentication and authorization
 4. User can get urls
-5. Users can create shorter urls given an original longer urls
-6. Users are able to delete urls
-7. Test application
+5. Users can create shorter urls by providing an existing valid longer urls
+6. authrnticated Users are able to delete urls
+7. unit and integration testing using supertest and jest
 ---
 
 ## Setup
 - Install NodeJS, mongodb, Redis
-- api documentation at https://titly.onrender.com/api/docs/
 ---
 ## Base URL
 - https://titly.onrender.com
-
+- api documentation at https://titly.onrender.com/api/docs/
 
 ## Models
 ---
@@ -47,7 +46,7 @@ This is an api for titly app, a url shortening application
 ## APIs
 ---
 
-### Signup User
+### User signup
 
 - Route: auth/signup
 - Method: POST
@@ -74,7 +73,7 @@ Success
 }
 ```
 ---
-### Login User
+### User login
 
 - Route: auth/login
 - Method: POST
@@ -96,7 +95,7 @@ Success
 ```
 
 ---
-### Create a  shortenedurl
+### Create a shorter url
 
 - Route: /api/shorten
 - Method: POST
@@ -134,7 +133,7 @@ Success
 ```
 ---
 
-### Get urls
+### Get all user urls by their userId
 
 - Route: /api/shorten
 - Method: GET

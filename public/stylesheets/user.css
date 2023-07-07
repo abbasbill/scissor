@@ -34,7 +34,7 @@
 		.form-group input[type="submit"] {
 			padding: 10px 20px;
 			font-size: 16px;
-			background-color: #4caf50;
+			background-color: #3d4bb4;
 			color: #fff;
 			border: none;
 			border-radius: 4px;
@@ -42,7 +42,7 @@
 		}
 
 		.form-group input[type="submit"]:hover {
-			background-color: #45a049;
+			background-color: #030d20;
 		}
 
 		.nav {
