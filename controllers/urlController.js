@@ -50,6 +50,7 @@ exports.urlController = {
 
     // fetching users URL
     getUserUrls: async (req, res) => {
+        
         if (req.headers.referer && req.headers.referer.includes('api/docs')) {
             try {
                 // Find the corresponding URL document in the database
@@ -71,7 +72,7 @@ exports.urlController = {
                 if (urls) {
                     res.locals.urls = urls;
                 }
-                return res.render('user', { user: req.user.username });
+                return res.render('user', { user: req.user.username});
 
             } catch (error) {
                 // Handle any errors that occurred during the database operation
@@ -183,6 +184,8 @@ exports.urlController = {
      getQrCode: async (req, res) => {
         const data = req.body.shortenedUrl; // The data to be encoded in the QR code
         // Generate the QR code as a data URL
+        
+
         QRCode.toDataURL(data, (err, url) => {
           if (err) {
             console.error(err);
@@ -194,6 +197,7 @@ exports.urlController = {
             res.locals.data = data
             res.render('qrcode', { url: url });
           }
+
         });
       }
       
