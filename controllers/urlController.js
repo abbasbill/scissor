@@ -1,9 +1,10 @@
 const { urlModel } = require('../models')
-var validUrl = require('valid-url');
+var validator = require('validator');
 const shortid = require('shortid');
 const cache = require("../config/redis")
 const httpStatus = require('http-status');
 const QRCode = require('qrcode');
+const moment = require('moment');
 
 
 exports.urlController = {
@@ -13,7 +14,7 @@ exports.urlController = {
         try {
             const { originalUrl } = req.body;
             // Validate the long URL
-            if (!validUrl.isUri(originalUrl)) {
+            if (!validator.isURL(originalUrl)) {
                return res.status(400).json({ error: 'Invalid URL' });
             }
 
@@ -29,6 +30,7 @@ exports.urlController = {
                 originalUrl: originalUrl,
                 shortenedUrl: shortenedUrl,
                 clicks: [],
+                createdAt: moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
                 user: req.user._id
             });
             // returns url object if req.header("content-type") === 'application/json'

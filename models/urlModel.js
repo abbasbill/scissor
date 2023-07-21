@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const moment = require('moment');
+
 const Schema = mongoose.Schema;
 
 const urlSchema = new Schema({
@@ -28,7 +28,6 @@ const urlSchema = new Schema({
       ],
       createdAt: {
         type: Date,
-        default: moment().utc().format('YYYY-MM-DD HH:mm:ss'),
       },
 
       user: 
