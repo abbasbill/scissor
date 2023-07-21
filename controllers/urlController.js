@@ -14,7 +14,7 @@ exports.urlController = {
             const { originalUrl } = req.body;
             // Validate the long URL
             if (!validUrl.isUri(originalUrl)) {
-                res.status(400).json({ error: 'Invalid URL' });
+               return res.status(400).json({ error: 'Invalid URL' });
             }
 
             // Check if the long URL already exists in the database
