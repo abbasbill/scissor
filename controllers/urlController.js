@@ -1,5 +1,5 @@
 const { urlModel } = require('../models')
-var validator = require('validator');
+const validUrl = require('valid-url');
 const shortid = require('shortid');
 const cache = require("../config/redis")
 const httpStatus = require('http-status');
@@ -10,13 +10,15 @@ const moment = require('moment');
 exports.urlController = {
 
     // generating short URLs
-    createShortUrl: async (req, res) => {
+    createShortUrl: async (req, res, next) => {
         try {
             const { originalUrl } = req.body;
             // Validate the long URL
-            if (!validator.isURL(originalUrl)) {
-               return res.status(400).json({ error: 'Invalid URL' });
-            }
+            if (!validUrl.isUri(originalUrl)) {
+                throw new Error('Invalid URL');
+            //    return res.status(400).json({ error: 'Invalid URL' });
+            // res.render('error', { error: 'Invalid URL' });
+            } else if(validUrl.isUri(originalUrl)) {
 
             // Check if the long URL already exists in the database
             const existingUrl = await urlModel.findOne({ $and: [{ user: req.user._id }, { originalUrl: originalUrl }] });
@@ -40,12 +42,13 @@ exports.urlController = {
             } else {
                 // else redirects to the shorten endpoint if req.header("content-type") !== 'application/json'
                 return res.redirect(303, "/api/shorten");
-            }
+            }}
 
         } catch (error) {
             // Handle any errors that occurred during the database operation
             console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
+            // res.status(500).json({ error: 'Internal Server Error' });
+            next(error);
         }
     },
 
