@@ -24,8 +24,6 @@
 			</form>
 
 	</nav>
-
-	<header class="header">
 		<img src="/images/infographic.jpg" alt="short-a-link" class="short-link-img">
 		<div class="container">
 			<h1>shorten a long link</h1>
@@ -40,7 +38,6 @@
 				</div>
 			</form>
 		</div>
-	</header>
 
 		<% if (urls.length === 0) { %>
 		<div class="url-list" >
@@ -87,17 +84,7 @@
 			<% } %>
 	</ul>
 
-	<script>
-		function sendDeleteRequest() {
-		  var form = document.getElementById("deleteForm");
-		  var id = form.elements["id"].value;
-	  
-		  // Perform the DELETE request using fetch API
-		  fetch("/api/shorten/" + id, {
-			method: "DELETE"
-		  })
-		}
-
+	<script src="/javascripts/user.js">
 	</script>
 
 </body>

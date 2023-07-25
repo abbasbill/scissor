@@ -179,7 +179,7 @@ exports.urlController = {
                 console.log(deleteUrl)
                 // Find the corresponding URL document in the database
                 const url = await urlModel.findOneAndRemove({ _id: deleteUrl });
-                return res.redirect(303, "/api/shorten");;    
+                return res.redirect(303, "/api/shorten");  
             } catch (error) {
                 // Handle any errors that occurred during the database operation
                 console.error(error);

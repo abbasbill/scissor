@@ -20,7 +20,7 @@
   margin-top: 55px;
   margin-right: auto;
   width: 40%;
-  height: 20%;
+  /* height: 20%; */
 }
 
 h1 {
@@ -170,7 +170,7 @@ a {
 
   .container {
     max-width: 100%;
-    margin: 10px auto;
+    margin: 0 auto;
     padding: 10px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -204,4 +204,8 @@ a {
   .form-group input[type="submit"] {
     width: 95%;
   }
+  .short-link-img {
+  margin-top: 100px;
+  /* height: 20%; */
+}
 }

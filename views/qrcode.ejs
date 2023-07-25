@@ -3,76 +3,7 @@
   <head>
     <title>Qrcode</title>
     <link rel="stylesheet" href="/stylesheets/user.css">
-    <style>
-      /* CSS styles for the modal */
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        position: relative;
-        height: 80vh;
-      }
-
-      .qrButton {
-        position: absolute;
-        top: 30%;
-        left: 45%;
-        transform: translate(-50, -50);
-      }
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-
-      .modal-content {
-        background-color: white;
-        margin: 10% auto;
-        padding: 20px;
-        max-width: 400px;
-        height: 60%;
-        overflow: hidden;
-      }
-
-      #openModalBtn {
-        background-color: #4caf50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 5px;
-      }
-
-      .close {
-        float: right;
-        cursor: pointer;
-        color: red;
-        font-size: 30px;
-        font-weight: bold;
-      }
-      img {
-        width: 95%;
-        height: 80%;
-      }
-
-      .url-data {
-        text-align: center;
-        font-size: 15px;
-      }
-
-      .close {
-        transform: rotate(45deg);
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/qrcode.css">
   </head>
   <body>
     <nav class="nav">
@@ -107,37 +38,7 @@
       </div>
     </div>
 
-    <script>
-        const openModalBtn = document.getElementById("openModalBtn");
-        const modal = document.getElementById("modal");
-        const closeModalBtn = document.getElementsByClassName("close")[0];
+    <script src="/javascripts/qrcode.js"></script>
 
-        const openModal = () => {
-          modal.style.display = "block";
-        }
-        const closeModal = () => {
-          modal.style.display = "none";
-          window.location = '/api/shorten';
-        }
-
-    //   const openModalBtn = document.getElementById("openModalBtn");
-    //   const modal = document.getElementById("modal");
-    //   const closeModal = document.getElementsByClassName("close")[0];
-
-    //   openModalBtn.addEventListener("click", function () {
-    //     modal.style.display = "block";
-    //   });
-
-    //   closeModalBtn.addEventListener("click", function () {
-    //     modal.style.display = "none";
-    //   });
-
-    //   window.addEventListener("click", function (event) {
-    //     if (event.target == modal) {
-    //       modal.style.display = "none";
-    //     }
-    //   });
-
-    </script>
   </body>
 </html>
