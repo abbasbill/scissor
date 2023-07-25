@@ -77,6 +77,7 @@ exports.urlController = {
             try {
                 // Find the corresponding URL document in the database
                 const urls = await urlModel.find({ user: req.user._id });
+                // console.log(urls.length) 
                 if (urls) {
                     res.locals.urls = urls;
                 }

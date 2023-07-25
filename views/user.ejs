@@ -13,23 +13,27 @@
 		<div class="user">
 			<%= user %>
 		</div>
-		<div>
+
+		<h1 style="color: #3d4bb4; margin: auto;">
+			titly
+		</h1>
+
+		
 			<form action="/auth/logout" method="post">
-				<button class="logout" type="submit">Sign out</button>
+				<button class="logout" type="submit">SignOut</button>
 			</form>
-		</div>
-		</ul>
+
 	</nav>
 
 	<header class="header">
-		<h1>Titly</h1>
+		<img src="/images/infographic.jpg" alt="short-a-link" class="short-link-img">
 		<div class="container">
-			<h1>Shorten a long link</h1>
+			<h1>shorten a long link</h1>
 			<form action="/api/shorten" method="POST">
 				<div class="form-group">
 					<label for="originalUrl">Original URL:</label>
-					<input type="text" id="originalUrl" name="originalUrl" placeholder="http://example.com"
-						required>
+					<input id="create-a-short-link" type="text" id="originalUrl" name="originalUrl" placeholder="https://example.com"
+						required autofocus>
 				</div>
 				<div class="form-group">
 					<input type="submit" value="Create Short Link">
@@ -38,8 +42,21 @@
 		</div>
 	</header>
 
-	<ul class="url-list">
-		<h1>Links</h1>
+		<% if (urls.length === 0) { %>
+		<div class="url-list" >
+		<h1 style="padding-bottom: 15px;">Links</h1>
+		<div style="background-color:  #3d4bb4; border-radius: 5px;">
+		<a href="#create-a-short-link">
+			<p style="text-align: center; text-decoration: none; color: white; 
+				      font: bolder 20px/1.5 Helvetica, Verdana, sans-serif; padding: 10px;"> 
+				You don't have any links yet. create a short link!
+			</p>
+		</a>
+		</div>
+		</div>
+		<% } else { %>
+	      <ul class="url-list">
+		      <h1>Links</h1>
 		<% urls.forEach(function(url) { %>
 			<div class="url-box">
 			<!-- <a href="<%= url.originalUrl  %>"> -->
@@ -67,6 +84,7 @@
 				</div>
 			</div>
 			<% }); %>
+			<% } %>
 	</ul>
 
 	<script>
