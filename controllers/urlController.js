@@ -15,8 +15,11 @@ exports.urlController = {
             const { originalUrl } = req.body;
             // Validate the long URL
             if (!validUrl.isUri(originalUrl)) {
-                throw new Error('Invalid URL');
-            //    return res.status(400).json({ error: 'Invalid URL' });
+                // throw new Error('Invalid Url format');
+            //  return res.status(400).send({ error: 'Invalid URL' });
+               return res.send(
+                 "<script> alert('Invalid Url format'); window.location = '/api/shorten'; </script>"
+               );
             // res.render('error', { error: 'Invalid URL' });
             } else if(validUrl.isUri(originalUrl)) {
 
