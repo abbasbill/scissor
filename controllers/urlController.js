@@ -193,18 +193,22 @@ exports.urlController = {
      getQrCode: async (req, res) => {
         const data = req.body.shortenedUrl; // The data to be encoded in the QR code
         // Generate the QR code as a data URL
-        
-
-        QRCode.toDataURL(data, (err, url) => {
+           res.locals.user = req.user.username;
+        QRCode.toDataURL(data, (err, qrldata) => {
           if (err) {
             console.error(err);
-            res.status(500).send('Error generating QR code');
+            return res
+              .status(500)
+              .send(
+                "<script> alert('Error generating QR code'); window.location = '/api/shorten'; </script>"
+              );
           } else {
             // // Send the QR code image as a response
             // res.send(`<img src="${url}" alt="QR code" />`);
             //  res.send(url);
             res.locals.data = data
-            res.render('qrcode', { url: url });
+            
+            res.render('qrcode', { url: qrldata });
           }
 
         });

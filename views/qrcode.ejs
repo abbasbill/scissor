@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>Qrcode</title>
+    <link rel="stylesheet" href="/stylesheets/user.css">
     <style>
       /* CSS styles for the modal */
       * {
@@ -15,8 +16,8 @@
 
       .qrButton {
         position: absolute;
-        top: 50%;
-        left: 40%;
+        top: 30%;
+        left: 45%;
         transform: translate(-50, -50);
       }
       .modal {
@@ -27,18 +28,18 @@
         top: 0;
         width: 100%;
         height: 100%;
-        overflow: auto;
         background-color: rgba(0, 0, 0, 0.5);
       }
 
       .modal-content {
         background-color: white;
-        margin: 15% auto;
+        margin: 10% auto;
         padding: 20px;
-        width: 60%;
         max-width: 400px;
         height: 60%;
+        overflow: hidden;
       }
+
       #openModalBtn {
         background-color: #4caf50;
         border: none;
@@ -74,9 +75,29 @@
     </style>
   </head>
   <body>
+    <nav class="nav">
+		<a href="/api/shorten">
+    <div class="user">
+			<%= user %>
+		</div>
+    </a>
+		<h1 style="color: #3d4bb4; margin: auto;">
+			titly
+		</h1>
+
+		
+			<form action="/auth/logout" method="post">
+				<button class="logout" type="submit">SignOut</button>
+			</form>
+
+	</nav>
+
+	<header class="header">
+		<!-- <img src="/images/infographic.jpg" alt="short-a-link" class="short-link-img"> -->
+
     <div class="qrButton">
-      <h1>QR Code</h1>
-      <button id="openModalBtn" onclick="openModal()">View qrCode</button>
+      <h1>Qr Code</h1>
+      <button id="openModalBtn" onclick="openModal()">View QrCode</button>
     </div>
     <div id="modal" class="modal">
       <div class="modal-content">
@@ -96,6 +117,7 @@
         }
         const closeModal = () => {
           modal.style.display = "none";
+          window.location = '/api/shorten';
         }
 
     //   const openModalBtn = document.getElementById("openModalBtn");
