@@ -1,91 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>titly</title>
+    <link rel="stylesheet" href="/stylesheets/user.css" />
+  </head>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>titly</title>
-	<link rel="stylesheet" href="/stylesheets/user.css">
-</head>
+  <body>
+    <nav class="nav">
+      <a href="/api/shorten"><div class="user"><%= user %></div> </a>
+      <h1 style="color: #3d4bb4; margin: auto">titly</h1>
 
-<body>
-	<nav class="nav">
-		<a href="/api/shorten"><div class="user">
-			<%= user %>
-		</div>
-		</a>
-		<h1 style="color: #3d4bb4; margin: auto;">
-			titly
-		</h1>
+      <form action="/auth/logout" method="post">
+        <button class="logout" type="submit">SignOut</button>
+      </form>
+    </nav>
+    <img
+      src="/images/infographic.jpg"
+      alt="short-a-link"
+      class="short-link-img"
+    />
+    <div class="container">
+      <h1>shorten a long link</h1>
+      <form action="/api/shorten" method="POST">
+        <div class="form-group">
+          <label for="originalUrl">Original URL:</label>
+          <input
+            id="create-a-short-link"
+            type="text"
+            id="originalUrl"
+            name="originalUrl"
+            placeholder="https://example.com"
+            required
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Create Short Link" />
+        </div>
+      </form>
+    </div>
 
-		
-			<form action="/auth/logout" method="post">
-				<button class="logout" type="submit">SignOut</button>
-			</form>
+    <% if (urls.length === 0) { %>
+    <div class="url-list">
+      <h1 style="padding-bottom: 15px">Links</h1>
+      <div style="background-color: #3d4bb4; border-radius: 5px">
+        <a href="#create-a-short-link">
+          <p
+            style="
+              text-align: center;
+              text-decoration: none;
+              color: white;
+              font: bolder 20px/1.5 Helvetica, Verdana, sans-serif;
+              padding: 10px;
+            "
+          >
+            You don't have any links yet. create a short link!
+          </p>
+        </a>
+      </div>
+    </div>
+    <% } else { %>
+    <ul class="url-list">
+      <h1>Links</h1>
+      <% urls.forEach(function(url) { %>
+      <div class="url-box">
+        <!-- <a href="<%= url.originalUrl  %>"> -->
+        <p class="shortened-url"><%= url.shortenedUrl %></p>
+        <!-- </a>	 -->
+        <a href="<%= url.originalUrl  %>">
+          <p class="original-url"><%= url.originalUrl %></p>
+        </a>
 
-	</nav>
-		<img src="/images/infographic.jpg" alt="short-a-link" class="short-link-img">
-		<div class="container">
-			<h1>shorten a long link</h1>
-			<form action="/api/shorten" method="POST">
-				<div class="form-group">
-					<label for="originalUrl">Original URL:</label>
-					<input id="create-a-short-link" type="text" id="originalUrl" name="originalUrl" placeholder="https://example.com"
-						required autofocus>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Create Short Link">
-				</div>
-			</form>
-		</div>
+        <p class="clicks">Clicks: <%= url.clicks.length %></p>
+        <p class="date"><%= url.createdAt %></p>
 
-		<% if (urls.length === 0) { %>
-		<div class="url-list" >
-		<h1 style="padding-bottom: 15px;">Links</h1>
-		<div style="background-color:  #3d4bb4; border-radius: 5px;">
-		<a href="#create-a-short-link">
-			<p style="text-align: center; text-decoration: none; color: white; 
-				      font: bolder 20px/1.5 Helvetica, Verdana, sans-serif; padding: 10px;"> 
-				You don't have any links yet. create a short link!
-			</p>
-		</a>
-		</div>
-		</div>
-		<% } else { %>
-	      <ul class="url-list">
-		      <h1>Links</h1>
-		<% urls.forEach(function(url) { %>
-			<div class="url-box">
-			<!-- <a href="<%= url.originalUrl  %>"> -->
-				<p class="shortened-url"><%= url.shortenedUrl  %></p>
-			<!-- </a>	 -->
-			<a href="<%= url.originalUrl  %>">
-				<p class="original-url"><%= url.originalUrl %></p>
-			</a>
-				<span>
-					<p class="clicks">Clicks: <%= url.clicks.length %></p>
-					<p class="date"><%= url.createdAt %></p>
-				</span>
+        <div class="qrcode-row">
+          <div>
+            <form action="/api/shorten/qrcode" method="post">
+              <input
+                type="hidden"
+                name="shortenedUrl"
+                value="<%= url.shortenedUrl %>"
+              />
+              <button class="qr-code" type="submit">Create a QR Code</button>
+            </form>
+          </div>
 
-				<div class="qrcode-row">
-					
-					<form action="/api/shorten/qrcode" method="post">
-						<input type="hidden" name="shortenedUrl" value="<%= url.shortenedUrl %>">
-						<button class="qr-code" type="submit">Create a QR Code</button>
-					</form>
+          <div class="delete-row">
+            <form id="deleteForm">
+              <input type="hidden" name="id" value="<%= url._id %>" />
+              <button
+                class="delete"
+                type="submit"
+                onclick="sendDeleteRequest()"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% }); %> <% } %>
+    </ul>
 
-					<form id="deleteForm">
-						<input type="hidden" name="id" value="<%= url._id %>">
-						<button class="delete" type="submit" onclick="sendDeleteRequest()">Delete</button>
-					</form>
-				</div>
-			</div>
-			<% }); %>
-			<% } %>
-	</ul>
-
-	<script src="/javascripts/user.js">
-	</script>
-
-</body>
+    <script src="/javascripts/user.js"></script>
+  </body>
 </html>

@@ -1,4 +1,5 @@
 const { urlModel } = require('../models')
+const catchAsync = require("../utils/catchAsync");
 const validUrl = require('valid-url');
 const shortid = require('shortid');
 const cache = require("../config/redis")
@@ -21,13 +22,17 @@ exports.urlController = {
                  "<script> alert('Invalid Url format'); window.location = '/api/shorten'; </script>"
                );
             // res.render('error', { error: 'Invalid URL' });
-            } else if(validUrl.isUri(originalUrl)) {
+            } else {
 
             // Check if the long URL already exists in the database
             const existingUrl = await urlModel.findOne({ $and: [{ user: req.user._id }, { originalUrl: originalUrl }] });
 
             if (existingUrl) {
-                return res.status(201).send("Url already exist")
+                return res
+                  .status(201)
+                  .send(
+                    "<script> alert('url already exist'); window.location = '/api/shorten'; </script>"
+                  );
             }
 
             const shortenedUrl = `https://titly.onrender.com/${shortid.generate()}`;
@@ -35,7 +40,7 @@ exports.urlController = {
                 originalUrl: originalUrl,
                 shortenedUrl: shortenedUrl,
                 clicks: [],
-                createdAt: moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+                createdAt: moment().toDate(), // .utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
                 user: req.user._id
             });
             // returns url object if req.header("content-type") === 'application/json'
@@ -77,7 +82,6 @@ exports.urlController = {
             try {
                 // Find the corresponding URL document in the database
                 const urls = await urlModel.find({ user: req.user._id });
-                // console.log(urls.length) 
                 if (urls) {
                     res.locals.urls = urls;
                 }
@@ -134,7 +138,7 @@ exports.urlController = {
 
                 // If short URL doesn't exist, return 404 error
                 if (!url) {
-                    return res.status(404).send("url Not found");
+                    return res.status(404).send("invalid url");
                 }
                 if (url) {
                     const results = req.params.shortenedUrl
@@ -161,7 +165,6 @@ exports.urlController = {
         if(req.headers.referer && req.headers.referer.includes('api/docs')){
             try {
                 const deleteUrlId = req.params.id;
-                console.log(deleteUrlId)
                 // Find the corresponding URL document in the database
                 const url = await urlModel.findOneAndDelete({ _id: deleteUrlId });
                 if (!url) {
@@ -176,7 +179,6 @@ exports.urlController = {
         } else {
             try {
                 const deleteUrl = req.params.id;
-                console.log(deleteUrl)
                 // Find the corresponding URL document in the database
                 const url = await urlModel.findOneAndRemove({ _id: deleteUrl });
                 return res.redirect(303, "/api/shorten");  
@@ -190,28 +192,27 @@ exports.urlController = {
      },
 
 
-     getQrCode: async (req, res) => {
-        const data = req.body.shortenedUrl; // The data to be encoded in the QR code
-        // Generate the QR code as a data URL
-           res.locals.user = req.user.username;
-        QRCode.toDataURL(data, (err, qrldata) => {
-          if (err) {
-            console.error(err);
-            return res
-              .status(500)
-              .send(
-                "<script> alert('Error generating QR code'); window.location = '/api/shorten'; </script>"
-              );
-          } else {
-            // // Send the QR code image as a response
-            // res.send(`<img src="${url}" alt="QR code" />`);
-            //  res.send(url);
-            res.locals.data = data
-            
-            res.render('qrcode', { url: qrldata });
-          }
+     getQrCode: catchAsync(async (req, res) => {
+          const data = req.body.shortenedUrl; // The data to be encoded in the QR code
+          // Generate the QR code as a data URL
+          res.locals.user = req.user.username;
+          QRCode.toDataURL(data, (err, qrldata) => {
+            if (err) {
+              console.error(err);
+              return res
+                .status(500)
+                .send(
+                  "<script> alert('Error generating QR code'); window.location = '/api/shorten'; </script>"
+                );
+            } else {
+              // // Send the QR code image as a response
+              // res.send(`<img src="${url}" alt="QR code" />`);
+              //  res.send(url);
+              res.locals.data = data;
 
-        });
-      }
-      
+              res.render("qrcode", { url: qrldata });
+            }
+          });
+      })
+     
 }
