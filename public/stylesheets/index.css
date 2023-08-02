@@ -39,11 +39,12 @@
       padding: 10px 20px;
       font-size: 18px;
       text-decoration: none;
-      background-color: #4caf50;
+      background-color: #0cad11;
       color: #ffffff;
       border-radius: 5px;
       margin: 10px;
       transition: background-color 0.3s ease;
+      max-width: 450px;
     }
     
     .button:hover {

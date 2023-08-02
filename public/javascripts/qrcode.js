@@ -7,5 +7,5 @@ const openModal = () => {
 };
 const closeModal = () => {
   modal.style.display = "none";
-  window.location = "/api/shorten";
+  // window.location = "/api/shorten";
 };

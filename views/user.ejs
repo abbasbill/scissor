@@ -84,7 +84,7 @@
                 name="shortenedUrl"
                 value="<%= url.shortenedUrl %>"
               />
-              <button class="qr-code" type="submit">Create a QR Code</button>
+              <button class="qr-code" type="submit">View QR Code</button>
             </form>
           </div>
 
@@ -92,9 +92,8 @@
             <form id="deleteForm">
               <input type="hidden" name="id" value="<%= url._id %>" />
               <button
+              id="deleteButton"
                 class="delete"
-                type="submit"
-                onclick="sendDeleteRequest()"
               >
                 Delete
               </button>
@@ -104,6 +103,9 @@
       </div>
       <% }); %> <% } %>
     </ul>
+
+
+
 
     <script src="/javascripts/user.js"></script>
   </body>
