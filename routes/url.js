@@ -12,7 +12,7 @@ urlRouter.get('/', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlControll
 
 urlRouter.delete('/:id', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.deleteUserUrl);
 
-urlRouter.post('/qrcode', urlController.getQrCode);
+urlRouter.post('/qrcode', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.getQrCode);
 
 module.exports = urlRouter;
 

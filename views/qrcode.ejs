@@ -19,12 +19,12 @@
       </form>
     </nav>
 
-    <div class="qrButton">
-      <button id="openModalBtn" onclick="openModal()">View QrCode</button>
-    </div>
+  
+      <button class="qrButton" id="openModalBtn" onclick="openModal()">View QrCode</button>
+
     <div id="modal" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="closeModal()">+</span>
+        <div class="close" onclick="closeModal()">+</div>
         <h2 class="url-data"><%= data %></h2>
         <img src="<%= url %>" alt="QR code" />`
       </div>

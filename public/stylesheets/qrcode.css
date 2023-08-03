@@ -6,15 +6,24 @@
 
       body {
         position: relative;
-        height: 80vh;
       }
 
-      .qrButton {
+
+       .qrButton {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 5px;
         position: absolute;
         top: 30%;
         left: 45%;
         transform: translate(-50, -50);
       }
+
+
       .modal {
         display: none;
         position: fixed;
@@ -35,17 +44,6 @@
         overflow: hidden;
       }
 
-      #openModalBtn {
-        background-color: #4caf50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 5px;
-      }
 
       .close {
         float: right;
@@ -53,6 +51,8 @@
         color: red;
         font-size: 30px;
         font-weight: bold;
+        transform: rotate(45deg);
+
       }
       img {
         width: 95%;
@@ -62,8 +62,4 @@
       .url-data {
         text-align: center;
         font-size: 15px;
-      }
-
-      .close {
-        transform: rotate(45deg);
       }
