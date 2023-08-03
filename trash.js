@@ -232,3 +232,18 @@ exports.urlController = {
     //      }
   }),
 };
+
+
+//  .qrButton {
+//         background-color: #4caf50;
+//         border: none;
+//         color: white;
+//         padding: 10px 20px;
+//         text-align: center;
+//         font-size: 16px;
+//         border-radius: 5px;
+//         position: absolute;
+//         top: 30%;
+//         left: 45%;
+//         transform: translate(-50, -50);
+//       }
