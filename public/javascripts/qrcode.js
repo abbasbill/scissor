@@ -1,6 +1,4 @@
-const openModalBtn = document.getElementById("openModalBtn");
-const modal = document.getElementById("modal");
-const closeModalBtn = document.getElementsByClassName("close")[0];
+// const modal = document.getElementById("modal");
 
 const openModal = () => {
   modal.style.display = "block";
