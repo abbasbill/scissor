@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Qrcode</title>
-    <link rel="stylesheet" href="/stylesheets/user.css">
-    <link rel="stylesheet" href="/stylesheets/qrcode.css">
+    <link rel="stylesheet" href="/stylesheets/user.css" />
+    <link rel="stylesheet" href="/stylesheets/qrcode.css" />
   </head>
   <body>
     <nav class="nav">
-		<a href="/api/shorten">
-    <div class="user">
-			<%= user %>
-		</div>
-    </a>
-		<h1 style="color: #3d4bb4; margin: auto;">
-			titly
-		</h1>
+      <a href="/api/shorten">
+        <div class="user"><%= user %></div>
+      </a>
+      <h1 style="color: #3d4bb4; margin: auto">titly</h1>
 
-		
-			<form action="/auth/logout" method="post">
-				<button class="logout" type="submit">SignOut</button>
-			</form>
-
-	</nav>
+      <form action="/auth/logout" method="post">
+        <button class="logout" type="submit">SignOut</button>
+      </form>
+    </nav>
 
     <div class="qrButton">
       <button id="openModalBtn" onclick="openModal()">View QrCode</button>
@@ -35,6 +31,5 @@
     </div>
 
     <script src="/javascripts/qrcode.js"></script>
-
   </body>
 </html>
