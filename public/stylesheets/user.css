@@ -127,7 +127,9 @@ a {
   white-space: nowrap; /* Force content to stay on one line */
   text-overflow: ellipsis;
   max-width: 80%;
+  color: black;
 }
+
 
 .date {
   font-size: 14px;
@@ -138,8 +140,8 @@ a {
   max-width: 80%;
 }
 
-.qrcode-row {
-  margin: 10px 10px;
+.qrcode-delete-row {
+  margin: 2px 15px 10px 2px;
   display: flex;
   justify-content: space-between;
   font-size: 15px;

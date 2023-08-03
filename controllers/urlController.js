@@ -36,7 +36,7 @@ exports.urlController = {
         originalUrl: originalUrl,
         shortenedUrl: shortenedUrl,
         clicks: [],
-        createdAt: moment().toDate(), // .utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+        createdAt: moment().format("MM/DD/YYYY, h:mm A"), //.utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
         user: req.user._id,
       });
 

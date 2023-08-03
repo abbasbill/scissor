@@ -43,6 +43,7 @@
     </div>
 
     <% if (urls.length === 0) { %>
+
     <div class="url-list">
       <h1 style="padding-bottom: 15px">Links</h1>
       <div style="background-color: #3d4bb4; border-radius: 5px">
@@ -61,10 +62,14 @@
         </a>
       </div>
     </div>
+
     <% } else { %>
+
     <ul class="url-list">
       <h1>Links</h1>
+
       <% urls.forEach(function(url) { %>
+
       <div class="url-box">
         <!-- <a href="<%= url.originalUrl  %>"> -->
         <p class="shortened-url"><%= url.shortenedUrl %></p>
@@ -74,9 +79,10 @@
         </a>
 
         <p class="clicks">Clicks: <%= url.clicks.length %></p>
-        <p class="date"><%= url.createdAt %></p>
+        <p class="date"><%= url.createdAt.toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'long' }); %></p>
 
-        <div class="qrcode-row">
+        <div class="qrcode-delete-row">
+
           <div>
             <form action="/api/shorten/qrcode" method="post">
               <input
@@ -88,7 +94,6 @@
             </form>
           </div>
 
-          <div class="delete-row">
             <form id="deleteForm">
               <input type="hidden" name="id" value="<%= url._id %>" />
               <button
@@ -98,10 +103,12 @@
                 Delete
               </button>
             </form>
+
           </div>
-        </div>
       </div>
-      <% }); %> <% } %>
+
+      <% }) %> 
+      <% } %>
     </ul>
 
 
