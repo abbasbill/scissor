@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>titly</title>
     <link rel="stylesheet" href="/stylesheets/user.css" />
   </head>
@@ -90,9 +91,19 @@
                 name="shortenedUrl"
                 value="<%= url.shortenedUrl %>"
               />
-              <button class="qr-code" type="submit">View QR Code</button>
+              <button class="qr-code" type="submit" >View QR Code</button>
             </form>
           </div>
+
+            <form id="deleteForm">
+              <input type="hidden" name="id" value="<%= url._id %>" />
+              <button
+              id="deleteButton"
+                class="delete"
+              >
+                Delete
+              </button>
+            </form>
 
             <form id="deleteForm">
               <input type="hidden" name="id" value="<%= url._id %>" />
@@ -110,9 +121,6 @@
       <% }) %> 
       <% } %>
     </ul>
-
-
-
 
     <script src="/javascripts/user.js"></script>
   </body>
