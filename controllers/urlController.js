@@ -129,7 +129,6 @@ exports.urlController = {
       if (req.headers.referer && req.headers.referer.includes("api/docs")) {
         return res.status(200).send("Url deleted successfully");
       } else {
-        console.log("Url deleted successfully");
         return res.redirect(303, "/api/shorten");
 
       }
