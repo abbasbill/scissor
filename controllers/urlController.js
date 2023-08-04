@@ -125,12 +125,15 @@ exports.urlController = {
     const url = await urlModel.findOneAndDelete({ _id: req.params.id });
     if (!url) {
       return res.status(404).send("not found");
-    }
+    } else {
+      if (req.headers.referer && req.headers.referer.includes("api/docs")) {
+        return res.status(200).send("Url deleted successfully");
+      } else {
+        console.log("Url deleted successfully");
+        return res.redirect(303, "/api/shorten");
 
-    if (req.headers.referer && req.headers.referer.includes("api/docs")) {
-      return res.status(200).send("Url deleted successfully");
+      }
     }
-    return res.status(200).redirect(303, "/api/shorten");
   }),
 
   getQrCode: catchAsync(async (req, res) => {

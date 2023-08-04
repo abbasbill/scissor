@@ -137,21 +137,19 @@ a {
 }
 
 .qrcode-delete-row {
-  margin: 2px 15px 10px 2px;
   display: flex;
   justify-content: space-between;
   font-size: 15px;
   font-weight: bolder;
-  cursor: pointer;
+  align-items: center;
 }
 
 .delete {
   background-color: red;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 0;
   color: white;
 }
 .qr-code {

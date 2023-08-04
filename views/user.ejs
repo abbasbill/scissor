@@ -96,10 +96,11 @@
               <button class="qr-code" type="submit">View QR Code</button>
             </form>
           </div>
-
-          <button class="delete" onclick="deleteItem('<%= url._id %>')">
+          <div>
+          <a href="/api/shorten"><button class="delete" type="button" onclick="deleteItem('<%= url._id %>')">
             Delete
-          </button>
+          </button></a>
+          </div>
         </div>
       </div>
 
