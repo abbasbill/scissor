@@ -80,10 +80,12 @@
         </a>
 
         <p class="clicks">Clicks: <%= url.clicks.length %></p>
-        <p class="date"><%= url.createdAt.toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'long' }); %></p>
+        <p class="date">
+          <%= url.createdAt.toLocaleString('en-GB', { dateStyle: 'medium',
+          timeStyle: 'long' }); %>
+        </p>
 
         <div class="qrcode-delete-row">
-
           <div>
             <form action="/api/shorten/qrcode" method="post">
               <input
@@ -91,27 +93,20 @@
                 name="shortenedUrl"
                 value="<%= url.shortenedUrl %>"
               />
-              <button class="qr-code" type="submit" >View QR Code</button>
+              <button class="qr-code" type="submit">View QR Code</button>
             </form>
           </div>
 
-            <form id="deleteForm">
-              <input type="hidden" name="id" value="<%= url._id %>" />
-              <button
-              id="deleteButton"
-                class="delete"
-              >
-                Delete
-              </button>
-            </form>
-
-          </div>
+          <button class="delete" onclick="deleteItem('<%= url._id %>')">
+            Delete
+          </button>
+        </div>
       </div>
 
-      <% }) %> 
-      <% } %>
+      <% }) %> <% } %>
     </ul>
 
+   
     <script src="/javascripts/user.js"></script>
   </body>
 </html>

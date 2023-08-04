@@ -247,3 +247,22 @@ exports.urlController = {
 //         left: 45%;
 //         transform: translate(-50, -50);
 //       }
+
+//  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+//   <script>
+//     function deleteItem(itemId) {
+//       // Send the DELETE request using Axios
+//       axios.delete(`/api/items/${itemId}`)
+//         .then(response => {
+//           // Optionally handle success or update UI after the deletion
+//           console.log(`Item with ID ${itemId} deleted successfully.`);
+//           location.reload(); // Refresh the page after deletion (optional)
+//         })
+//         .catch(error => {
+//           // Handle errors, if any
+//           console.error('Error deleting item:', error);
+//         });
+//     }
+//   </script>
+
+
