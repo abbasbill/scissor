@@ -10,7 +10,7 @@ urlRouter.post('/',  connectEnsureLogin.ensureLoggedIn("/auth/login"), urlContro
 // Route for fetching users URL
 urlRouter.get('/', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.getUserUrls);
 
-urlRouter.delete('/:id', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.deleteUserUrl);
+urlRouter.get('/delete/:id', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.deleteUserUrl);
 
 urlRouter.post('/qrcode', connectEnsureLogin.ensureLoggedIn("/auth/login"), urlController.getQrCode);
 
