@@ -12,7 +12,12 @@ exports.urlController = {
   createShortUrl: catchAsync(async (req, res, next) => {
     const { originalUrl } = req.body;
     // Validate the long URL
-    if (!validUrl.isUri(originalUrl)) {
+    const urlPattern =
+      /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\S*)$/;
+
+    // if (!validUrl.isUri(originalUrl))
+
+    if (!urlPattern.test(originalUrl)) {
       return res.send(
         "<script> alert('Invalid Url format'); window.location = '/api/shorten'; </script>"
       );
