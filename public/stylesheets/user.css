@@ -142,12 +142,13 @@ a {
   font-size: 15px;
   font-weight: bolder;
   align-items: center;
+  align-content: center;
 }
 
 .delete {
   background-color: red;
   border: none;
-  padding: 10px 15px;
+  padding: 10px;
   border-radius: 4px;
   cursor: pointer;
   color: white;
