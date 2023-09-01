@@ -10,7 +10,8 @@ exports.authController = {
 			const user = req.body;
 			const existingUser = await userModel.findOne({ username: user.username });
 			if (existingUser) {
-				return res.status(httpStatus.CONFLICT).send("user already exist");
+				return res.redirect(303, "/auth/login");
+
 			}
 			userModel.register(new userModel({ username: user.username }), user.password, (err, user) => {
 				if (err) {
